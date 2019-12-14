@@ -30,6 +30,8 @@ nbproject
 .sass-cache
 .session
 *.log
+/Uploads/*.csv
+/Resources/Private/Templates/cache*
 #
 # Ignore build stuff
 /.ddev/*
@@ -37,9 +39,3 @@ nbproject
 # Ignore composer stuff
 /bin/*
 /vendor/*
-#
-# Ignore common TYPO3 CMS files/directories
-/Uploads/*.csv
-#
-# root .htaccess file
-/.htaccess
