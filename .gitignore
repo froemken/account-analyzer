@@ -1,0 +1,45 @@
+########################
+# Account Analyzer
+# global ignore file
+########################
+#
+# Don't ignore .rej and .orig as we want to see/clean files after conflict resolution.
+#
+# For local exclude patterns please edit .git/info/exclude.
+#
+########################
+#
+# Ignore temporary files (left by editors and OS)
+*~
+*.bak
+*.swp
+.DS_Store
+#
+# Ignore by common IDEs used directories/files
+nbproject
+*.idea
+*.project
+.buildpath
+.settings
+.TemporaryItems
+.webprj
+#
+# Temporary files and folders
+.cache
+.php_cs.cache
+.sass-cache
+.session
+*.log
+#
+# Ignore build stuff
+/.ddev/*
+#
+# Ignore composer stuff
+/bin/*
+/vendor/*
+#
+# Ignore common TYPO3 CMS files/directories
+/Uploads/*.csv
+#
+# root .htaccess file
+/.htaccess
