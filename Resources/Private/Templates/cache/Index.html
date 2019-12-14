@@ -1,0 +1,20 @@
+<?php $_v=&$this->vars;?>
+<html lang="de">
+<head>
+    <title>Account Analyzer</title>
+    <link rel="stylesheet" href="Resources/Public/Css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <h1>Upload your CSV file from your bank account</h1>
+    <form action="/index.php?action=upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="uploadFile">Choose CSV file</label>
+            <input type="file" name="uploadFile" class="form-control" id="uploadFile" >
+            <small id="uploadHelp" class="form-text text-muted">Nothing will be saved</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload CSV file</button>
+    </form>
+</div>
+</body>
+</html>

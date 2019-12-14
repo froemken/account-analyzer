@@ -1,0 +1,60 @@
+<?php $_v=&$this->vars;?>
+<html lang="de">
+<head>
+    <title>Account Analyzer</title>
+    <link rel="stylesheet" href="Resources/Public/Css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <h1>Your analyzed Account data</h1>
+
+    <nav class="nav nav-pills nav-fill">
+        <a class="nav-item nav-link" href="/index.php?action=grouped">Grouped</a>
+        <a class="nav-item nav-link" href="/index.php?action=year">Year</a>
+        <a class="nav-item nav-link" href="/index.php?action=flush">Clear Cache</a>
+    </nav>
+
+    <?php $_v['sum']=sumAmount($_v['rows']);?>
+
+    <div class="alert <?php if($_v['sum'] < 0){?>
+alert-danger<?php }else{?>
+alert-success<?php }?>" role="alert">
+        Total: <?php echo sumAmount($_v['rows']);?>
+
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><a href="/index.php?action=analyze&sortBy=bookingTimestamp&sortDir=<?php echo $_v['sortDir'];?>
+">Datum</a></th>
+            <th><a href="/index.php?action=analyze&sortBy=receiver&sortDir=<?php echo $_v['sortDir'];?>
+">Auftraggeber</a></th>
+            <th><a href="/index.php?action=analyze&sortBy=amount&sortDir=<?php echo $_v['sortDir'];?>
+">Betrag</a></th>
+            <th><a href="/index.php?action=analyze&sortBy=saldo&sortDir=<?php echo $_v['sortDir'];?>
+">Saldo</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if(!empty($_v['rows']))foreach($_v['rows'] as $_v['row']){?>
+        <tr>
+            <td rowspan="2"><?php echo $_v['row']['bookingDate'];?>
+</td>
+            <td><?php echo $_v['row']['receiver'];?>
+</td>
+            <td><?php echo $_v['row']['amount'];?>
+</td>
+            <td><?php echo $_v['row']['saldo'];?>
+</td>
+        </tr>
+        <tr>
+            <td colspan="3"><?php echo $_v['row']['description'];?>
+</td>
+        </tr>
+        <?php }?>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

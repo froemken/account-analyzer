@@ -1,0 +1,37 @@
+<?php $_v=&$this->vars;?>
+<html lang="de">
+<head>
+    <title>Account Analyzer</title>
+    <link rel="stylesheet" href="Resources/Public/Css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <h1>Year View</h1>
+
+    <nav class="nav nav-pills nav-fill">
+        <a class="nav-item nav-link" href="/index.php?action=analyze">Back to Analyze</a>
+        <a class="nav-item nav-link" href="/index.php?action=grouped">Grouped</a>
+        <a class="nav-item nav-link" href="/index.php?action=flush">Clear Cache</a>
+    </nav>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Month</th>
+            <th>Betrag</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if(!empty([1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'Dezember']))foreach([1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'Dezember'] as $_v['id'] => $_v['name']){?>
+        <tr>
+            <td><?php echo $_v['name'];?>
+</td>
+            <td><?php $_v['sum']=sumAmount($_v['rows'][$_v['id']]); echo $_v['sum'];?>
+</td>
+        </tr>
+        <?php }?>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

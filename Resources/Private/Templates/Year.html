@@ -1,0 +1,34 @@
+<html lang="de">
+<head>
+    <title>Account Analyzer</title>
+    <link rel="stylesheet" href="Resources/Public/Css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <h1>Year View</h1>
+
+    <nav class="nav nav-pills nav-fill">
+        <a class="nav-item nav-link" href="/index.php?action=analyze">Back to Analyze</a>
+        <a class="nav-item nav-link" href="/index.php?action=grouped">Grouped</a>
+        <a class="nav-item nav-link" href="/index.php?action=flush">Clear Cache</a>
+    </nav>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Month</th>
+            <th>Betrag</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach [1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'Dezember'] as $id => $name}
+        <tr>
+            <td>{name}</td>
+            <td>{eval $sum=sumAmount($rows[$id])}{sum}</td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

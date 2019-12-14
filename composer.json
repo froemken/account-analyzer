@@ -1,0 +1,29 @@
+{
+  "name": "stefanfroemken/account-analyzer",
+  "description": "Use your CSV Export of your salary account to analyze its data",
+  "license": "GPL-2.0-or-later",
+  "keywords": ["account", "salary", "analyze"],
+  "homepage": "https://www.typo3lexikon.de",
+  "authors": [
+    {
+      "name": "Stefan Froemken",
+      "email": "froemken@gmail.com",
+      "role": "Lead Developer"
+    }
+  ],
+  "support": {
+    "email": "froemken@gmail.com",
+    "issues": "https://github.com/froemken/account-analyzer/issues",
+    "source": "https://github.com/froemken/account-analyzer"
+  },
+  "require": {
+    "ext-zip": "*",
+    "monotek/minitpl": ">=1.0",
+    "symfony/yaml": "^4.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "StefanFroemken\\AccountAnalyzer\\": "Classes"
+    }
+  }
+}
