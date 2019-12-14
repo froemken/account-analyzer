@@ -9,9 +9,9 @@ You can install this package with:
 There is not really something to configure. Ok, there is a Main.yaml file in Configuration folder where you can change the template paths. I have never tested, if changing these folders will work.
 
 ## Requirement
-No Database needed
-PHP 7.1-7.4 should work, but only PHP 7.3 tested
-Because of various .htaccess files you should use Apache Server. Of cause Nginx is possible, but in that case you have to secure Uploads-folder on your own.
+* No Database needed
+* PHP 7.1-7.4 should work, but only PHP 7.3 tested
+* Because of various .htaccess files you should use Apache Server. Of cause Nginx is possible, but in that case you have to secure Uploads-folder on your own.
 
 ## Using this package
 Open index.php in your Browser. You will see an Upload Form. Here you can upload the CSV file from your bank. The file will be stored in Uploads-folder which is normally secured by a .htaccess file (only Apache).
