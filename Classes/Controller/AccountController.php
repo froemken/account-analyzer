@@ -57,15 +57,27 @@ class AccountController
 
     public function flushAction()
     {
-        GeneralUtility::flushDirectory(
-            GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/Uploads',
-            true
+        $csvFiles = GeneralUtility::getFilesInDir(
+            $this->accountRepository->getUploadsFolder(),
+            '',
+            true,
+            '',
+            '.htaccess'
         );
+        if (is_array($csvFiles)) {
+            foreach ($csvFiles as $csvFile) {
+                @unlink($csvFile);
+            }
+        }
+
+        $this->accountRepository->reset();
+
         return $this->indexAction();
     }
 
     public function analyzeAction()
     {
+        $this->accountRepository->loadCsvData();
         $currentSortingDirection = (int)($_GET['sortDir'] ?? SORT_DESC);
         $this->view->load('Analyze.html');
         $this->view->assign(
@@ -86,6 +98,7 @@ class AccountController
 
     public function groupedAction()
     {
+        $this->accountRepository->loadCsvData();
         $month = (int)($_GET['month'] ?? 1);
         $this->view->load('Grouped.html');
         $this->view->assign('month', $month);
@@ -102,6 +115,7 @@ class AccountController
 
     public function yearAction()
     {
+        $this->accountRepository->loadCsvData();
         $this->view->load('Year.html');
         $this->view->assign(
             'rows',

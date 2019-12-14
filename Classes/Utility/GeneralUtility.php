@@ -1654,7 +1654,8 @@ class GeneralUtility
             $temporaryDirectory = rtrim($directory, '/') . '.' . StringUtility::getUniqueId('remove');
             if (rename($directory, $temporaryDirectory)) {
                 if ($flushOpcodeCache) {
-                    self::makeInstance(OpcodeCacheService::class)->clearAllActive($directory);
+                    $opcodeCacheService = new OpcodeCacheService();
+                    $opcodeCacheService->clearAllActive($directory);
                 }
                 if ($keepOriginalDirectory) {
                     static::mkdir($directory);

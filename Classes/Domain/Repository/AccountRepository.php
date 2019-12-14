@@ -35,10 +35,15 @@ class AccountRepository
     public function __construct()
     {
         $this->uploadsFolder = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/Uploads';
-        $csvFiles = GeneralUtility::getFilesInDir($this->uploadsFolder,'csv');
+    }
+
+    public function loadCsvData(): bool
+    {
+        $this->reset();
+        $csvFiles = GeneralUtility::getFilesInDir($this->uploadsFolder,'csv', true);
         if (is_array($csvFiles) && !empty($csvFiles)) {
             $this->csvFile = current($csvFiles);
-            $rows = file($this->uploadsFolder . '/' . $this->csvFile);
+            $rows = file($this->csvFile);
             if (is_array($rows)) {
                 $csvBody = array_slice($rows, 15);
                 foreach ($csvBody as $position => $row) {
@@ -55,8 +60,21 @@ class AccountRepository
                     )->format('U');
                     $this->csvData[] = $csvData;
                 }
+                return true;
             }
         }
+        return false;
+    }
+
+    public function reset()
+    {
+        $this->csvFile = '';
+        $this->csvData = [];
+    }
+
+    public function getUploadsFolder(): string
+    {
+        return $this->uploadsFolder;
     }
 
     public function hasCsvFile(): bool
@@ -81,7 +99,7 @@ class AccountRepository
         return $data;
     }
 
-    public function getGroupedByMonths()
+    public function getGroupedByMonths(): array
     {
         $months = [];
         foreach ($this->csvData as $column => $row) {
@@ -94,8 +112,8 @@ class AccountRepository
         return $months;
     }
 
-    public function getGroupedByMonth(int $month)
+    public function getGroupedByMonth(int $month): array
     {
-        return $this->getGroupedByMonths()[$month];
+        return array_key_exists($month, $this->getGroupedByMonths()) ? $this->getGroupedByMonths()[$month] : [];
     }
 }
