@@ -31,7 +31,7 @@ nbproject
 .session
 *.log
 /Uploads/*.csv
-/Resources/Private/Templates/cache/*
+/cache/*
 #
 # Ignore build stuff
 /.ddev/*
