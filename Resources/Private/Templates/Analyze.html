@@ -15,15 +15,15 @@
 
     {eval $sum=sumAmount($rows);}
     <div class="alert {if $sum < 0}alert-danger{else}alert-success{/if}" role="alert">
-        Total: {rows|sumAmount}
+        Win/Lost within time: {rows|sumAmount}
     </div>
 
     <table class="table table-striped">
         <thead>
         <tr>
-            <th><a href="/index.php?action=analyze&sortBy=bookingTimestamp&sortDir={sortDir}">Datum</a></th>
-            <th><a href="/index.php?action=analyze&sortBy=receiver&sortDir={sortDir}">Auftraggeber</a></th>
-            <th><a href="/index.php?action=analyze&sortBy=amount&sortDir={sortDir}">Betrag</a></th>
+            <th><a href="/index.php?action=analyze&sortBy=bookingTimestamp&sortDir={sortDir}">Date</a></th>
+            <th><a href="/index.php?action=analyze&sortBy=receiver&sortDir={sortDir}">Receiver</a></th>
+            <th><a href="/index.php?action=analyze&sortBy=amount&sortDir={sortDir}">Amount</a></th>
             <th><a href="/index.php?action=analyze&sortBy=saldo&sortDir={sortDir}">Saldo</a></th>
         </tr>
         </thead>

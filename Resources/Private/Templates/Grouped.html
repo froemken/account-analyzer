@@ -21,15 +21,15 @@
 
     {eval $sum=sumAmount($rows);}
     <div class="alert {if $sum < 0}alert-danger{else}alert-success{/if}" role="alert">
-        Total: {rows|sumAmount}
+        Win/Lost within month: {rows|sumAmount}
     </div>
 
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Datum</th>
-            <th>Auftraggeber</th>
-            <th>Betrag</th>
+            <th>Date</th>
+            <th>Receiver</th>
+            <th>Amount</th>
             <th>Saldo</th>
         </tr>
         </thead>
