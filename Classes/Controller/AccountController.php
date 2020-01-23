@@ -43,6 +43,7 @@ class AccountController
             && isset($_FILES['uploadFile'])
             && $_FILES['uploadFile']['error'] === 0
         ) {
+            $this->flushAction();
             move_uploaded_file(
                 $_FILES['uploadFile']['tmp_name'],
                 sprintf(
