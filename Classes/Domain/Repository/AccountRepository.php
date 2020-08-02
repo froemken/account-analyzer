@@ -22,9 +22,9 @@ class AccountRepository
     protected $columns = [
         0 => 'bookingDate',
         2 => 'receiver',
-        4 => 'description',
-        5 => 'saldo',
-        7 => 'amount'
+        5 => 'description',
+        6 => 'saldo',
+        8 => 'amount'
     ];
 
     /**
