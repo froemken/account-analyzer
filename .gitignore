@@ -33,9 +33,6 @@ nbproject
 /Uploads/*.csv
 /Resources/Private/Templates/cache/*
 #
-# Ignore build stuff
-/.ddev/*
-#
 # Ignore composer stuff
 /bin/*
 /vendor/*
