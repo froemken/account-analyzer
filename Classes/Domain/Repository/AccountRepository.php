@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace StefanFroemken\AccountAnalyzer\Domain\Repository;
 
 use StefanFroemken\AccountAnalyzer\Utility\GeneralUtility;
+use StefanFroemken\AccountAnalyzer\Utility\StringUtility;
 
 class AccountRepository
 {
@@ -22,9 +23,9 @@ class AccountRepository
     protected $columns = [
         0 => 'bookingDate',
         2 => 'receiver',
-        5 => 'description',
-        6 => 'saldo',
-        8 => 'amount'
+        4 => 'description',
+        5 => 'saldo',
+        7 => 'amount'
     ];
 
     /**
@@ -45,8 +46,7 @@ class AccountRepository
             $this->csvFile = current($csvFiles);
             $rows = file($this->csvFile);
             if (is_array($rows)) {
-                $csvBody = array_slice($rows, 15);
-                foreach ($csvBody as $position => $row) {
+                foreach ($this->getCsvBody($rows) as $row) {
                     $csvData = array_combine(
                         $this->columns,
                         array_intersect_key(
@@ -64,6 +64,24 @@ class AccountRepository
             }
         }
         return false;
+    }
+
+    /**
+     * Return CVS rows without header rows
+     *
+     * @param array $rows
+     * @return array
+     */
+    protected function getCsvBody(array $rows): array
+    {
+        $key = 0;
+        foreach ($rows as $key => $row) {
+            if (StringUtility::beginsWith($row, 'Buchung;')) {
+                break;
+            }
+        }
+
+        return array_slice($rows, $key + 1);
     }
 
     public function reset()
