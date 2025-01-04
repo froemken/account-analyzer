@@ -7,15 +7,9 @@ use Symfony\Component\Yaml\Yaml;
 
 class Configuration
 {
-    /**
-     * @var array
-     */
-    protected $mainConfiguration = [];
+    protected array $mainConfiguration = [];
 
-    /**
-     * @var ViewConfiguration
-     */
-    protected $viewConfiguration;
+    protected ViewConfiguration $viewConfiguration;
 
     public function __construct()
     {

@@ -4,17 +4,11 @@ namespace StefanFroemken\AccountAnalyzer\Configuration;
 
 class ViewConfiguration
 {
-    /**
-     * @var array
-     */
-    protected $templateRootPaths = [
+    protected array $templateRootPaths = [
         'Resources/Private/Templates/'
     ];
 
-    /**
-     * @var bool
-     */
-    protected $noCache = false;
+    protected bool $noCache = false;
 
     public function __construct(array $mainConfiguration)
     {
@@ -31,7 +25,7 @@ class ViewConfiguration
         }
     }
 
-    protected function setTemplateRootPaths(array $templateRootPaths)
+    protected function setTemplateRootPaths(array $templateRootPaths): void
     {
         $this->templateRootPaths = $templateRootPaths;
     }
@@ -39,15 +33,5 @@ class ViewConfiguration
     public function getTemplateRootPaths(): array
     {
         return $this->templateRootPaths;
-    }
-
-    public function setNoCache(bool $noCache)
-    {
-        $this->noCache = $noCache;
-    }
-
-    public function getNoCache(): bool
-    {
-        return $this->noCache;
     }
 }

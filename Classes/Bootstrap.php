@@ -5,15 +5,9 @@ use StefanFroemken\AccountAnalyzer\Controller\AccountController;
 
 class Bootstrap
 {
-    /**
-     * @var Configuration
-     */
-    protected $configuration;
+    protected Configuration $configuration;
 
-    /**
-     * Initialize this project
-     */
-    public function initialize()
+    public function initialize(): void
     {
         $this->configuration = new Configuration();
     }
@@ -21,7 +15,7 @@ class Bootstrap
     /**
      * Start project
      */
-    public function run()
+    public function run(): void
     {
         $this->initialize();
 
@@ -36,6 +30,6 @@ class Bootstrap
             $view = $controller->indexAction();
         }
 
-        $view->render();
+        echo $view->render();
     }
 }

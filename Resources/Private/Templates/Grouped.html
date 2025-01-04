@@ -14,14 +14,13 @@
     </nav>
 
     <nav class="nav nav-pills nav-fill">
-        {foreach [1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'Dezember'] as $id => $name}
-        <a class="nav-item nav-link{if $month==$id} active{/if}" href="/index.php?action=grouped&month={id}">{name}</a>
-        {/foreach}
+        <f:for each="{1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'Dezember'}" as="name" key="id">
+            <a class="nav-item nav-link {f:if(condition: '{month} == {id}', then: 'active')}" href="/index.php?action=grouped&month={id}">{name}</a>
+        </f:for>
     </nav>
 
-    {eval $sum=sumAmount($rows);}
-    <div class="alert {if $sum < 0}alert-danger{else}alert-success{/if}" role="alert">
-        Win/Lost within month: {rows|sumAmount}
+    <div class="alert {f:if(condition: '{sumAmount} < 0', then: 'alert-danger', else: 'alert-success'}" role="alert">
+        Win/Lost within month: {sumAmount}
     </div>
 
     <table class="table table-striped">
@@ -34,20 +33,20 @@
         </tr>
         </thead>
         <tbody>
-        {foreach $rows as $row}
-        <tr>
-            <td rowspan="2">{row['bookingDate']}</td>
-            <td>{row['receiver']}</td>
-            <td>{row['amount']}</td>
-            <td>{row['saldo']}</td>
-        </tr>
-        <tr>
-            <td colspan="3">{row['description']}</td>
-        </tr>
-        {/foreach}
+        <f:for each="{rows}" as="row">
+            <tr>
+                <td rowspan="2">{row.bookingDate}</td>
+                <td>{row.receiver}</td>
+                <td>{row.amount}</td>
+                <td>{row.saldo}</td>
+            </tr>
+            <tr>
+                <td colspan="3">{row.description}</td>
+            </tr>
+        </f:for>
         <tr>
             <td colspan="2"><strong>Total</strong></td>
-            <td colspan="2"><strong>{rows|sumAmount}</strong></td>
+            <td colspan="2"><strong>{sumAmount}</strong></td>
         </tr>
         </tbody>
     </table>

@@ -4,60 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7f4c8bf32c448b1b95ab1782eb58814",
+    "content-hash": "191d6c82f74a4c780400265daa362657",
     "packages": [
-        {
-            "name": "monotek/minitpl",
-            "version": "v1.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/titpetric/minitpl.git",
-                "reference": "0e7be2c67ffb5f3df48ad3be64151dcaa657549f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/titpetric/minitpl/zipball/0e7be2c67ffb5f3df48ad3be64151dcaa657549f",
-                "reference": "0e7be2c67ffb5f3df48ad3be64151dcaa657549f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Monotek\\MiniTPL": "code"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "CC BY-SA 3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Tit Petric",
-                    "email": "tit.petric@monotek.net",
-                    "homepage": "http://titpetric.github.io",
-                    "role": "developer"
-                }
-            ],
-            "description": "Miniature fully featured PHP template engine",
-            "homepage": "https://github.com/titpetric/minitpl",
-            "keywords": [
-                "minitpl",
-                "monotek",
-                "php",
-                "small",
-                "smarty",
-                "template",
-                "tiny"
-            ],
-            "support": {
-                "issues": "https://github.com/titpetric/minitpl/issues",
-                "source": "https://github.com/titpetric/minitpl/tree/v1.1.5"
-            },
-            "time": "2022-09-02T10:02:24+00:00"
-        },
         {
             "name": "symfony/polyfill-ctype",
             "version": "v1.31.0",
@@ -207,6 +155,60 @@
                 }
             ],
             "time": "2022-08-02T15:47:23+00:00"
+        },
+        {
+            "name": "typo3fluid/fluid",
+            "version": "4.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TYPO3/Fluid.git",
+                "reference": "5ecd828cfeb52c6d4583f48bb5c477346b62903c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TYPO3/Fluid/zipball/5ecd828cfeb52c6d4583f48bb5c477346b62903c",
+                "reference": "5ecd828cfeb52c6d4583f48bb5c477346b62903c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "ext-simplexml": "*",
+                "friendsofphp/php-cs-fixer": "^3.59.3",
+                "phpstan/phpstan": "^1.11.5",
+                "phpstan/phpstan-phpunit": "^1.4.0",
+                "phpunit/phpunit": "^11.2.5",
+                "psr/container": "^2.0",
+                "t3docs/fluid-documentation-generator": "^4.3"
+            },
+            "suggest": {
+                "ext-json": "PHP JSON is needed when using JSONVariableProvider: A relatively rare use case",
+                "ext-simplexml": "SimpleXML is required for the XSD schema generator"
+            },
+            "bin": [
+                "bin/fluid"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TYPO3Fluid\\Fluid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "description": "The TYPO3 Fluid template rendering engine",
+            "homepage": "https://github.com/TYPO3/Fluid",
+            "support": {
+                "docs": "https://docs.typo3.org/other/typo3fluid/fluid/main/en-us/",
+                "issues": "https://github.com/TYPO3/Fluid/issues",
+                "source": "https://github.com/TYPO3/Fluid"
+            },
+            "time": "2024-11-18T21:56:49+00:00"
         }
     ],
     "packages-dev": [],

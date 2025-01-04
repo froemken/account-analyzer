@@ -17,7 +17,7 @@ namespace StefanFroemken\AccountAnalyzer\Service;
 
 /**
  * Class with helper functions for clearing the PHP opcache.
- * It auto detects the opcache system and invalidates/resets it.
+ * It auto-detects the opcache system and invalidates/resets it.
  * http://forge.typo3.org/issues/55252
  * Supported opcaches are: OPcache >= 7.0 (PHP 5.5)
  */
@@ -28,7 +28,7 @@ class OpcodeCacheService
      *
      * @return array Array filled with supported and active opcaches
      */
-    public function getAllActive()
+    public function getAllActive(): array
     {
         $supportedCaches = [
             // The ZendOpcache aka OPcache since PHP 5.5
@@ -59,6 +59,7 @@ class OpcodeCacheService
                 $activeCaches[$opcodeCache] = $properties;
             }
         }
+
         return $activeCaches;
     }
 
@@ -67,7 +68,7 @@ class OpcodeCacheService
      *
      * @param string|null $fileAbsPath The file as absolute path to be cleared or NULL to clear completely.
      */
-    public function clearAllActive($fileAbsPath = null)
+    public function clearAllActive(string $fileAbsPath = null): void
     {
         foreach ($this->getAllActive() as $properties) {
             $callback = $properties['clearCallback'];

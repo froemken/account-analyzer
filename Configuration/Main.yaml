@@ -1,5 +1,4 @@
 main:
   view:
-    noCache: true
     templateRootPaths:
       - "Resources/Private/Templates/"

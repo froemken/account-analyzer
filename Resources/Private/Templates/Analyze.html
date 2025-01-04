@@ -13,9 +13,8 @@
         <a class="nav-item nav-link" href="/index.php?action=flush">Clear Cache</a>
     </nav>
 
-    {eval $sum=sumAmount($rows);}
-    <div class="alert {if $sum < 0}alert-danger{else}alert-success{/if}" role="alert">
-        Win/Lost within time: {rows|sumAmount}
+    <div class="alert {f:if(condition: '{sumAmount} < 0', then: 'alert-danger', else: 'alert-success')}" role="alert">
+        Win/Lost within time: {sumAmount}
     </div>
 
     <table class="table table-striped">
@@ -28,17 +27,17 @@
         </tr>
         </thead>
         <tbody>
-        {foreach $rows as $row}
-        <tr>
-            <td rowspan="2">{row['bookingDate']}</td>
-            <td>{row['receiver']}</td>
-            <td>{row['amount']}</td>
-            <td>{row['saldo']}</td>
-        </tr>
-        <tr>
-            <td colspan="3">{row['description']}</td>
-        </tr>
-        {/foreach}
+        <f:for each="{rows}" as="row">
+            <tr>
+                <td rowspan="2">{row.bookingDate}</td>
+                <td>{row.receiver}</td>
+                <td>{row.amount}</td>
+                <td>{row.saldo}</td>
+            </tr>
+            <tr>
+                <td colspan="3">{row.description}</td>
+            </tr>
+        </f:for>
         </tbody>
     </table>
 </div>

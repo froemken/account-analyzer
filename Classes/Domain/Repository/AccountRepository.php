@@ -7,31 +7,19 @@ use StefanFroemken\AccountAnalyzer\Utility\StringUtility;
 
 class AccountRepository
 {
-    /**
-     * @var string
-     */
-    protected $uploadsFolder = '';
+    protected string $uploadsFolder = '';
 
-    /**
-     * @var string
-     */
-    protected $csvFile = '';
+    protected string $csvFile = '';
 
-    /**
-     * @var array
-     */
-    protected $columns = [
+    protected array $columns = [
         0 => 'bookingDate',
         2 => 'receiver',
-        4 => 'description',
-        5 => 'saldo',
-        7 => 'amount'
+        5 => 'description',
+        6 => 'saldo',
+        8 => 'amount'
     ];
 
-    /**
-     * @var array
-     */
-    protected $csvData = [];
+    protected array $csvData = [];
 
     public function __construct()
     {
@@ -42,7 +30,7 @@ class AccountRepository
     {
         $this->reset();
         $csvFiles = GeneralUtility::getFilesInDir($this->uploadsFolder,'csv', true);
-        if (is_array($csvFiles) && !empty($csvFiles)) {
+        if (is_array($csvFiles) && $csvFiles !== []) {
             $this->csvFile = current($csvFiles);
             $rows = file($this->csvFile);
             if (is_array($rows)) {
@@ -68,9 +56,6 @@ class AccountRepository
 
     /**
      * Return CVS rows without header rows
-     *
-     * @param array $rows
-     * @return array
      */
     protected function getCsvBody(array $rows): array
     {
@@ -84,7 +69,7 @@ class AccountRepository
         return array_slice($rows, $key + 1);
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->csvFile = '';
         $this->csvData = [];
@@ -120,18 +105,20 @@ class AccountRepository
     public function getGroupedByMonths(): array
     {
         $months = [];
-        foreach ($this->csvData as $column => $row) {
+        foreach ($this->csvData as $row) {
             $bookingDate = \DateTime::createFromFormat(
                 'd.m.Y H:i:s',
                 $row['bookingDate'] . ' 00:00:00'
             );
-            $months[$bookingDate->format('n')][] = $row;
+            $months[$bookingDate->format('n')]['month'] = $bookingDate->format('F');
+            $months[$bookingDate->format('n')]['rows'][] = $row;
         }
+
         return $months;
     }
 
     public function getGroupedByMonth(int $month): array
     {
-        return array_key_exists($month, $this->getGroupedByMonths()) ? $this->getGroupedByMonths()[$month] : [];
+        return array_key_exists($month, $this->getGroupedByMonths()) ? $this->getGroupedByMonths()[$month]['rows'] : [];
     }
 }
