@@ -1,6 +1,6 @@
 <?php
 
-use StefanFroemken\BankViewer\Controller\WebController;
+use StefanFroemken\AccountAnalyzer\Controller\WebController;
 
 // Require Debug helper if DDEV environment, optional
 if (getenv('IS_DDEV_PROJECT') == 'true') {
