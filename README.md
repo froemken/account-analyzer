@@ -1,27 +1,39 @@
 # Account Analyzer
-This is a very little package to analyze your CSV data of your bank account. Currently it only works with exported CSV of www.ing.de
 
-## Install
-You can install this package with:
-`composer req stefanfroemken/account-analyzer`
+A lightweight PHP web application designed to parse and analyze exported bank account CSV files (specifically supporting ING format) and render a dashboard showing totals, monthly breakdowns, and transaction list views.
 
-## Configure
-There is not really something to configure. Ok, there is a Main.yaml file in Configuration folder where you can change the template paths. I have never tested, if changing these folders will work.
+## Installation
 
-## Requirement
-* No Database needed
-* PHP 7.1-7.4 should work, but only PHP 7.3 tested
-* Because of various .htaccess files you should use Apache Server. Of cause Nginx is possible, but in that case you have to secure Uploads-folder on your own.
+You can install this package via Composer:
+```bash
+composer require stefanfroemken/account-analyzer
+```
 
-## Using this package
-Open index.php in your Browser. You will see an Upload Form. Here you can upload the CSV file from your bank. The file will be stored in Uploads-folder which is normally secured by a .htaccess file (only Apache).
+## Requirements & Local Development
 
-### Views
-Default view is `Analyze`. Here you will see a complete table with all of your bookings and a total sum.
+* **PHP Version**: PHP 8.3 (configured via DDEV).
+* **Database**: No database required.
+* **Environment**: Local development is powered by **DDEV**.
+* **Webserver**: Nginx (`nginx-fpm`).
 
-You can switch to `grouped` view, to see all of your bookings grouped into month (Jan-Dec). Of cause a total of each month will be displayed.
+## Usage
 
-Last view in `year`. Here you can see all totals of each month.
+1. Start your local environment:
+   ```bash
+   ddev start
+   ```
+2. Open your browser at `https://konto.ddev.site` (or open `index.php`).
+3. Select and upload your ING bank account CSV file.
+4. Uploaded files are processed in temporary memory and immediately deleted after parsing. No uploaded files are stored on disk.
 
-## Clean up
-Each view has a link to `Clear Cache`. This button will delete all uploaded files in Uploads-folder directly, no confirmation message appears!
+## Views
+
+* **Month View**: Displays transactions grouped by month with monthly income, expenses, and net differences.
+* **Year View**: Provides a full year summary of monthly totals.
+
+## Testing
+
+Run the PHPUnit test suite inside the DDEV environment:
+```bash
+ddev exec ./vendor/bin/phpunit Tests
+```
