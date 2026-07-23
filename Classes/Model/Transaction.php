@@ -4,15 +4,15 @@ namespace StefanFroemken\AccountAnalyzer\Model;
 
 use DateTimeImmutable;
 
-class Transaction
+final readonly class Transaction
 {
     public function __construct(
-        private readonly DateTimeImmutable $date,
-        private readonly DateTimeImmutable $valutaDate,
-        private readonly string $recipient,
-        private readonly string $description,
-        private readonly float $amount,
-        private readonly string $currency
+        private DateTimeImmutable $date,
+        private DateTimeImmutable $valutaDate,
+        private string $recipient,
+        private string $description,
+        private float $amount,
+        private string $currency
     ) {}
 
     public function getDate(): DateTimeImmutable

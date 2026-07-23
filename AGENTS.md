@@ -59,3 +59,13 @@ Please note the following differences between the actual code behavior and the l
 ## Testing Policy
 * **Fictional Data Only**: All test files under `Tests/Unit/CsvParserTest.php` must strictly use anonymized, fictional test data and names (e.g., *Max Mustermann*).
 * **Safe Values**: Transaction amounts in unit tests must be kept under `1,400 EUR` to avoid any realistic representations of private salary details.
+
+---
+
+## Coding Guidelines & Style Preferences
+To ensure code readability and facilitate easy PHPUnit testing, the following rules apply:
+* **Class Length**: Any PHP class must not exceed **1,000 lines of code**.
+* **Method Length**: Any PHP method must not exceed **20 lines of code** (excluding comments, annotations, and empty lines).
+* **Decomposition**: Use helper classes (e.g., in a `Helper/` directory) or split tasks into dedicated service classes under `Classes/Service/` for complex operations.
+* **Stateless Architecture**: All Controller, Service, and Helper classes must be strictly **stateless** (no instance properties holding dynamic or mutable state). State is only permitted in Models, DTOs, and Enums.
+
