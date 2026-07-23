@@ -88,5 +88,5 @@ Please note the following differences between the actual code behavior and the l
 * **Sign-off**: All commits must use `-s` (`Signed-off-by`).
 * **AI Co-Author**: Always attribute AI assistance in commit messages using the trailer:
   ```text
-  Co-authored-by: Antigravity <antigravity@google.com>
+  Co-authored-by: Antigravity
   ```
