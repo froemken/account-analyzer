@@ -5,7 +5,7 @@ This file contains technical details, development environment configurations, an
 ---
 
 ## Technical Overview
-* **Application Type**: PHP-based web application with PSR-4 autoloading.
+* **Application Type**: PHP 8.3 web application with PSR-4 autoloading.
 * **Core Goal**: Parse exported bank account CSV files (specifically supporting ING format) and render a dashboard showing totals, monthly breakdowns, and list views.
 * **Templating**: Powered by `typo3fluid/fluid` to render views.
 * **Testing**: PHPUnit tests in the `Tests/` directory.
@@ -16,7 +16,7 @@ This file contains technical details, development environment configurations, an
 * **Local Development**: Built and run using **DDEV**.
   * Project Name: `konto`
   * Project TLD: `konto.ddev.site`
-  * PHP Version: `8.3`
+  * PHP Version: `8.3` (specifically PHP `8.3.31`)
   * Webserver: Nginx (`nginx-fpm`)
   * Database: MariaDB `10.11` (configured in DDEV, but the codebase does not use any database).
 * **Running Tests**: Tests must be executed inside the DDEV container:
@@ -40,7 +40,7 @@ This file contains technical details, development environment configurations, an
 Please note the following differences between the actual code behavior and the legacy statements in `README.md`:
 
 ### 1. PHP Version Requirement
-* **Reality**: Strictly requires **PHP 8.1+** (currently running PHP `8.3` in DDEV). The code uses modern PHP features such as constructor property promotion and `readonly` properties.
+* **Reality**: Requires **PHP 8.3** (configured in DDEV). Uses modern PHP 8.3 features such as typed class constants, match expressions, and Intl localization.
 * **README Discrepancy**: Legacy README states PHP 7.1-7.4 works, which is outdated and incorrect for the current codebase.
 
 ### 2. File Upload & Processing
@@ -56,16 +56,36 @@ Please note the following differences between the actual code behavior and the l
 
 ---
 
-## Testing Policy
+## Testing & Privacy Policy
 * **Fictional Data Only**: All test files under `Tests/Unit/CsvParserTest.php` must strictly use anonymized, fictional test data and names (e.g., *Max Mustermann*).
-* **Safe Values**: Transaction amounts in unit tests must be kept under `1,400 EUR` to avoid any realistic representations of private salary details.
+* **Safe Values**: Transaction amounts in unit tests must be kept strictly under `1,400 EUR` to avoid any realistic representations of private salary details.
 
 ---
 
 ## Coding Guidelines & Style Preferences
-To ensure code readability and facilitate easy PHPUnit testing, the following rules apply:
+
+### 1. Class & Method Boundaries
 * **Class Length**: Any PHP class must not exceed **1,000 lines of code**.
 * **Method Length**: Any PHP method must not exceed **20 lines of code** (excluding comments, annotations, and empty lines).
-* **Decomposition**: Use helper classes (e.g., in a `Helper/` directory) or split tasks into dedicated service classes under `Classes/Service/` for complex operations.
-* **Stateless Architecture**: All Controller, Service, and Helper classes must be strictly **stateless** (no instance properties holding dynamic or mutable state). State is only permitted in Models, DTOs, and Enums.
+* **Line Length**: Maximum line length is **~130 characters**. Wrap long lines.
+* **Decomposition**: Extract complex `if` condition expressions into self-documenting `is...()` or `has...()` boolean helper methods.
 
+### 2. Class Modifiers & Design
+* **`final` Classes**: Standalone PHP classes must be declared `final` since inheritance is not intended.
+* **`readonly class`**: ONLY use `readonly class` on pure Value Objects / DTOs (e.g., `Transaction`). NEVER declare Services, Controllers, or Parsers as `readonly class`.
+* **Constructor Property Promotion**: Do NOT duplicate `readonly` keywords on constructor properties if the class itself is already declared `readonly class`.
+* **Stateless Architecture**: Services, Parsers, and Helper classes must be strictly **stateless** (0 instance properties). Controllers may hold injected dependencies (e.g., `TemplateView`, Repositories). State is reserved for Models, DTOs, and Enums.
+* **No Pass-By-Reference**: Do NOT use pass-by-reference (`&`) arguments to mutate state in methods. Methods must return calculated values directly.
+
+### 3. Performance & PHP 8.3 Practices
+* **Array Empty Checks**: NEVER use `count($arr) > 0` or `count($arr) === 0` to check for empty/non-empty arrays. Use strict type comparisons `$arr !== []` or `$arr === []` for micro-second parsing performance.
+* **File Checking**: Do NOT use `file_exists()`. Use `is_file()` (or `is_dir()`) specifically.
+* **Typed Class Constants**: Unchanged array/scalar values must be declared as typed class constants (e.g., `private const array DEFAULT_COLUMN_INDICES = [...]`).
+* **Native PHP Features & Localization**: Use native PHP extensions (e.g., `IntlDateFormatter` via `ext-intl`) for standard calendar date formatting instead of custom enums or translation arrays.
+
+### 4. Git Commits & AI Attribution
+* **Sign-off**: All commits must use `-s` (`Signed-off-by`).
+* **AI Co-Author**: Always attribute AI assistance in commit messages using the trailer:
+  ```text
+  Co-authored-by: Antigravity <antigravity@google.com>
+  ```
