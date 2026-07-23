@@ -23,6 +23,7 @@ This file contains technical details, development environment configurations, an
   ```bash
   ddev exec ./vendor/bin/phpunit Tests
   ```
+* **Continuous Integration**: GitHub Actions workflow defined in `.github/workflows/tests.yml` automatically runs PHP syntax linting (`php -l`) and PHPUnit tests on PHP 8.3 for all Pull Requests and pushes to `master`.
 
 ---
 
